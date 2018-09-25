@@ -19,16 +19,29 @@ public class ProcessoDeMatricula {
 	}
 
 	public SituacaoMatricula verificarExistenciaAluno(String cpf) {
-		for(Aluno aluno : CursosRepository.alunos) {
-			if(aluno.getCpf().equals(cpf)) {
-				resultado = SituacaoMatricula.CadastradoNoCurso;
-			}else {
+		
+		SituacaoMatricula resultado = null;
+		
+		for(Aluno aluno : ProcessoDeMatricula.alunos)
+		{
+			if(aluno.getCpf().equals(cpf))
+			{
+				if(cursosRepository.existeAlunoNoCurso(cpf))
+				{
+					resultado = SituacaoMatricula.CadastradoNoCurso;
+				}
+				else
+				{
+					resultado = SituacaoMatricula.Cadastrado;
+				}				
+			}
+			else
+			{
 				resultado = SituacaoMatricula.Novo;
 			}
 		}
 		return resultado;
 	}
-	
 	public ComprovanteMatricula processarMatricula(DadosAluno dados) {
 		return null;
 	}
