@@ -43,7 +43,13 @@ public class ProcessoDeMatricula {
 		return resultado;
 	}
 	public ComprovanteMatricula processarMatricula(DadosAluno dados) {
-		return null;
+		Aluno aluno = new Aluno(gerarProntuario(), dados.getCpf(), dados.getNome(), dados.getEmail());
+		Collection<Turma> codigosTurmas = cursosRepository.buscarTurmas(curso.getCodigoCurso());
+		Turma turma = cursosRepository.buscarTurma(codigosTurmas);
+		
+		ComprovanteMatricula comprovante = new ComprovanteMatricula(aluno, turma);
+		
+		return comprovante;
 	}
 	
 	private String gerarProntuario() {
